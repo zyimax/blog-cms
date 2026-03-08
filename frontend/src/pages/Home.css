@@ -1,0 +1,98 @@
+.home {
+  padding: 40px 0;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 60px;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 20px;
+  opacity: 0.9;
+}
+
+.latest-articles h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.article-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.article-cover {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.article-content {
+  padding: 20px;
+}
+
+.article-content h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.article-content h3 a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.article-content h3 a:hover {
+  color: #007bff;
+}
+
+.article-summary {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.article-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 14px;
+  color: #999;
+}
+
+.loading,
+.error,
+.no-articles {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #666;
+}
+
+.error {
+  color: #dc3545;
+}
