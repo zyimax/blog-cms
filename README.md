@@ -1,4 +1,4 @@
-# Blog CMS - 内容管理系统（TRAE完成的）
+# Blog CMS - 内容管理系统（TRAE完成）
 
 【项目介绍】
 
