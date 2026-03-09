@@ -14,12 +14,6 @@ function ArticleList() {
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchCategories();
-    fetchTags();
-    fetchArticles();
-  }, [page, selectedCategory, selectedTag, keyword]);
-
   const fetchCategories = async () => {
     try {
       const response = await categoryApi.getAll();
@@ -59,6 +53,12 @@ function ArticleList() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchCategories();
+    fetchTags();
+    fetchArticles();
+  }, [page, selectedCategory, selectedTag, keyword]);
 
   const handleSearch = (e) => {
     e.preventDefault();

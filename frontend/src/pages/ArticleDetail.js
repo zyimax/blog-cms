@@ -9,10 +9,6 @@ function ArticleDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchArticle();
-  }, [id]);
-
   const fetchArticle = async () => {
     try {
       setLoading(true);
@@ -25,6 +21,10 @@ function ArticleDetail() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchArticle();
+  }, [id]);
 
   if (loading) {
     return <div className="loading">加载中...</div>;
