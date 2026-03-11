@@ -1,4 +1,4 @@
-# Blog CMS - 内容管理系统（TRAE完成）
+# Blog CMS - 内容管理系统（Vibe Coding）
 
 【项目介绍】
 
