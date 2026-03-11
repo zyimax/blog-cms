@@ -1,6 +1,8 @@
 package com.cms.controller;
 
+import com.cms.config.JwtConfig;
 import com.cms.dto.ApiResponse;
+import com.cms.dto.AuthResponse;
 import com.cms.dto.LoginRequest;
 import com.cms.dto.RegisterRequest;
 import com.cms.entity.User;
@@ -14,13 +16,14 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class UserController {
     private final UserService userService;
+    private final JwtConfig jwtConfig;
 
     @PostMapping("/login")
-    public ApiResponse<User> login(@RequestBody LoginRequest request) {
+    public ApiResponse<AuthResponse> login(@RequestBody LoginRequest request) {
         User user = userService.login(request);
         if (user != null) {
-            user.setPassword(null);
-            return ApiResponse.success("登录成功", user);
+            String token = jwtConfig.generateToken(user.getUsername());
+            return ApiResponse.success("登录成功", new AuthResponse(token, user));
         }
         return ApiResponse.error("用户名或密码错误");
     }

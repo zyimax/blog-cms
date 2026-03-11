@@ -10,6 +10,12 @@ CREATE TABLE IF NOT EXISTS users (
     nickname VARCHAR(50),
     avatar VARCHAR(255),
     bio TEXT,
+    points INT NOT NULL DEFAULT 0,
+    article_count INT NOT NULL DEFAULT 0,
+    comment_count INT NOT NULL DEFAULT 0,
+    like_count INT NOT NULL DEFAULT 0,
+    experience INT NOT NULL DEFAULT 0,
+    level INT NOT NULL DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

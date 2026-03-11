@@ -5,6 +5,7 @@ import com.cms.dto.RegisterRequest;
 import com.cms.entity.User;
 import com.cms.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
@@ -13,10 +14,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public User login(LoginRequest request) {
         Optional<User> user = userRepository.findByUsername(request.getUsername());
-        if (user.isPresent() && user.get().getPassword().equals(request.getPassword())) {
+        if (user.isPresent() && passwordEncoder.matches(request.getPassword(), user.get().getPassword())) {
             return user.get();
         }
         return null;
@@ -33,7 +35,7 @@ public class UserService {
         
         User user = new User();
         user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setEmail(request.getEmail());
         user.setNickname(request.getNickname() != null ? request.getNickname() : request.getUsername());
         return userRepository.save(user);

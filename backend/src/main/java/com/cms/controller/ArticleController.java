@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -90,10 +91,12 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ApiResponse<Article> create(@RequestBody ArticleRequest request) {
+    public ApiResponse<Article> create(@RequestBody ArticleRequest request, @AuthenticationPrincipal User currentUser) {
         try {
-            User author = userService.findById(1L);
-            Article article = articleService.create(request, author);
+            if (currentUser == null) {
+                return ApiResponse.error("未登录或登录已过期");
+            }
+            Article article = articleService.create(request, currentUser);
             return ApiResponse.success("文章创建成功", article);
         } catch (Exception e) {
             return ApiResponse.error(e.getMessage());
@@ -101,10 +104,12 @@ public class ArticleController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<Article> update(@PathVariable Long id, @RequestBody ArticleRequest request) {
+    public ApiResponse<Article> update(@PathVariable Long id, @RequestBody ArticleRequest request, @AuthenticationPrincipal User currentUser) {
         try {
-            User author = userService.findById(1L);
-            Article article = articleService.update(id, request, author);
+            if (currentUser == null) {
+                return ApiResponse.error("未登录或登录已过期");
+            }
+            Article article = articleService.update(id, request, currentUser);
             if (article != null) {
                 return ApiResponse.success("文章更新成功", article);
             }

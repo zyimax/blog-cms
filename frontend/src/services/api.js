@@ -9,6 +9,27 @@ const api = axios.create({
   },
 });
 
+// Add a request interceptor to include the JWT token
+api.interceptors.request.use(
+  (config) => {
+    const storedAuth = localStorage.getItem('user');
+    if (storedAuth) {
+      try {
+        const authData = JSON.parse(storedAuth);
+        if (authData.token) {
+          config.headers.Authorization = `Bearer ${authData.token}`;
+        }
+      } catch (e) {
+        console.error('Error parsing auth data from localStorage', e);
+      }
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 export const articleApi = {
   getAll: (page = 0, size = 10) => api.get(`/articles?page=${page}&size=${size}`),
   getPublished: (page = 0, size = 10) => api.get(`/articles/published?page=${page}&size=${size}`),

@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import ArticleList from './pages/ArticleList';
 import ArticleDetail from './pages/ArticleDetail';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/articles" element={<ArticleList />} />
             <Route path="/articles/:id" element={<ArticleDetail />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </main>
         <footer className="footer">
